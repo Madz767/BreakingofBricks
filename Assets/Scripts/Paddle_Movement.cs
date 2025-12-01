@@ -29,7 +29,25 @@ public class Paddle_Movement : MonoBehaviour
         rb.linearVelocity = new Vector2(sideInput * speed, 1);
     }
 
-
-
-
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.gameObject.CompareTag("Heal"))
+        {
+            Destroy(collision.gameObject);
+            GameManager.Instance.AddLife();
+        }
+        else if (collision.gameObject.CompareTag("Shield"))
+        {
+            Destroy(collision.gameObject);
+            GameManager.Instance.ActivateShield();
+        }
+        else if (collision.gameObject.CompareTag("Poison"))
+        {
+            Destroy(collision.gameObject);
+            GameManager.Instance.Poision();
+        }
+    }
 }
+
+
+

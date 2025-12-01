@@ -15,6 +15,7 @@ public class Ball_Movement : MonoBehaviour
     {
         rb = GetComponent<Rigidbody2D>();
         rb.bodyType = RigidbodyType2D.Kinematic;
+        gameObject.transform.parent = GameManager.Instance.Ball_Spawner;
     }
 
     // Update is called once per frame
@@ -36,6 +37,7 @@ public class Ball_Movement : MonoBehaviour
     private void LaunchBall()
     {
         isLaunched = true;
+        transform.parent = null;
         rb.bodyType = RigidbodyType2D.Dynamic;
         rb.linearVelocity = Vector2.up * speed;
     }    
@@ -58,4 +60,29 @@ public class Ball_Movement : MonoBehaviour
         rb.linearVelocity = vel.normalized * speed;
 
     }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.CompareTag("DeadZone"))
+        {
+            //why couldn't you catch the ball
+            
+            if(GameManager.Instance.LostBall())
+            {                 
+                ResetBall();
+            }
+            
+        }
+    }
+
+    public void ResetBall()
+    {
+        isLaunched = false;
+        rb.bodyType = RigidbodyType2D.Kinematic;
+        rb.linearVelocity = Vector2.zero;
+        transform.parent = GameManager.Instance.Ball_Spawner;
+        transform.position = GameManager.Instance.Ball_Spawner.position;
+    }
 }
+
+
