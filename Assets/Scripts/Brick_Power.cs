@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class Brick_Power : MonoBehaviour
 {
-    
+    public int scoreValue;
     public int BrickHP;
     public GameObject PowerUp;
 
@@ -17,7 +17,9 @@ public class Brick_Power : MonoBehaviour
                 Instantiate(PowerUp, transform.position, Quaternion.identity);
             }
             
-                Destroy(gameObject);
+            GameManager.Instance.AddScore(scoreValue);
+            Debug.Log("Score Added");
+            Destroy(gameObject);
         }
         else
         {

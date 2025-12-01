@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 3694940389035552698}
   m_Layer: 0
   m_Name: Brick_Green
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -101,6 +101,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 04e115cf67015584bbb9efb3d904a407, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Brick_Power
+  scoreValue: 50
   BrickHP: 2
   PowerUp: {fileID: 5825585690224581301, guid: e2e44288f30bea74dbdd8870d74d7ad9, type: 3}
 --- !u!1001 &4957158603313828579
@@ -114,6 +115,10 @@ PrefabInstance:
     - target: {fileID: -2253911629886400664, guid: a3d68d910bf21884ca6aebf8f3209bb4, type: 3}
       propertyPath: m_Name
       value: Sprite-Brick02
+      objectReference: {fileID: 0}
+    - target: {fileID: 3626916397498700004, guid: a3d68d910bf21884ca6aebf8f3209bb4, type: 3}
+      propertyPath: m_SortingOrder
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7878350319992209165, guid: a3d68d910bf21884ca6aebf8f3209bb4, type: 3}
       propertyPath: m_LocalPosition.x

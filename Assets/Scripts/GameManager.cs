@@ -5,7 +5,8 @@ public class GameManager : MonoBehaviour
 {
 
     public static GameManager Instance;
-
+    
+    public int score;
     public int Lives = 3;
     public GameObject Ball;
     public GameObject Shield;
@@ -29,13 +30,20 @@ public class GameManager : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
+        Time.timeScale = 1f;
         Lives = 3;
         Shield.SetActive(false);
         Ball.transform.position = Ball_Spawner.position;
         Ball.transform.parent = Ball_Spawner;
+        Debug.Log(score);
+        Debug.Log(Lives);
     }
 
-   
+    public void ResetGame()
+    {
+        score = 0;
+        Lives = 3;
+    }
 
     public bool LostBall()
     {
@@ -43,14 +51,10 @@ public class GameManager : MonoBehaviour
         if (Lives > 0)
         {
             //respawns the ball
+            Debug.Log(Lives);
             return true;
         }
-        else
-        {
-            //you have died
-            GameOver();
-            return false;
-        }
+        return false;
     }
 
 
@@ -81,12 +85,12 @@ public class GameManager : MonoBehaviour
     }
 
 
-    private void GameOver()
+    public void AddScore(int points)
     {
-
-        
-
-
+        score += points;
+        Debug.Log(score);
     }
+
+    
 
 }

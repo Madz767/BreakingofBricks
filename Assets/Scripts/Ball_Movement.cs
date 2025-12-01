@@ -47,13 +47,13 @@ public class Ball_Movement : MonoBehaviour
         //this code avoids having the ball just having perfect bounces and adds some randomness to it
         Vector2 vel = rb.linearVelocity;
 
-        if (Mathf.Abs(vel.x) < 0.1f)
+        if (Mathf.Abs(vel.x) < 0.25f)
         {
-            vel.x = vel.x < 0 ? -0.3f : 0.3f;
+            vel.x = vel.x < 0 ? -0.6f : 0.6f;
         }
         if (Mathf.Abs(vel.y) < 0.1f)
         {
-            vel.y = vel.y < 0 ? -0.3f : 0.3f;
+            vel.y = vel.y < 0 ? -0.6f : 0.6f;
         }
 
         //this is used to maintain consistent speed
