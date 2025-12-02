@@ -32,6 +32,11 @@ public class Ball_Movement : MonoBehaviour
             // my check to make sure the ball doesn't stop moving
             rb.linearVelocity = rb.linearVelocity.normalized * speed;
         }
+
+        if(GameManager.Instance.enemies <= 0)
+        {
+            ResetBall();
+        }
     }
 
     private void LaunchBall()
@@ -66,9 +71,10 @@ public class Ball_Movement : MonoBehaviour
         if (collision.CompareTag("DeadZone"))
         {
             //why couldn't you catch the ball
-            
-            if(GameManager.Instance.LostBall())
-            {                 
+            //calling poison here because it does what i need
+            if (GameManager.Instance.LostBall())
+            {     
+                GameManager.Instance.Poision();
                 ResetBall();
             }
             
@@ -80,8 +86,9 @@ public class Ball_Movement : MonoBehaviour
         isLaunched = false;
         rb.bodyType = RigidbodyType2D.Kinematic;
         rb.linearVelocity = Vector2.zero;
-        transform.parent = GameManager.Instance.Ball_Spawner;
         transform.position = GameManager.Instance.Ball_Spawner.position;
+        transform.parent = GameManager.Instance.Ball_Spawner;
+        
     }
 }
 

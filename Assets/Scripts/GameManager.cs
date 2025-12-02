@@ -7,11 +7,13 @@ public class GameManager : MonoBehaviour
     public static GameManager Instance;
     
     public int score;
-    public int Lives = 3;
+    public int Lives;
+    public int enemies;
     public GameObject Ball;
     public GameObject Shield;
     public Transform Ball_Spawner;
-    
+    public Transform Shield_Spawn;
+
 
 
     private void Awake()
@@ -24,30 +26,49 @@ public class GameManager : MonoBehaviour
         else
         {
             Destroy(gameObject);
+
         }
     }
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
+        //setting the time, health, and amount of enemies
         Time.timeScale = 1f;
         Lives = 3;
-        Shield.SetActive(false);
-        Ball.transform.position = Ball_Spawner.position;
+        enemies = GameObject.FindGameObjectsWithTag("Enemy").Length +1;
+
+        //creating the ball
+        Instantiate(Ball, Ball_Spawner.position, Quaternion.identity);
         Ball.transform.parent = Ball_Spawner;
+
+        //hiding the shield
+        Shield.transform.parent = null;
+        Shield.SetActive(false);
+        
+
+        //testing initialization
         Debug.Log(score);
         Debug.Log(Lives);
+        Debug.Log(enemies);
     }
 
     public void ResetGame()
     {
+        
+        
+        
+        enemies = GameObject.FindGameObjectsWithTag("Enemy").Length + 1;
         score = 0;
         Lives = 3;
+        Shield.SetActive(false);
+        Ball.transform.position = Ball_Spawner.position;
+        Ball.transform.parent = Ball_Spawner;
     }
 
     public bool LostBall()
     {
-        Lives--;
+        
         if (Lives > 0)
         {
             //respawns the ball
@@ -75,9 +96,11 @@ public class GameManager : MonoBehaviour
 
     public void ActivateShield()
     {
+        Debug.Log("Shield Activated");
         Shield.SetActive(true);
         StartCoroutine(ShieldTimer());
     }
+
     IEnumerator ShieldTimer()
     {
         yield return new WaitForSeconds(4);
@@ -91,6 +114,15 @@ public class GameManager : MonoBehaviour
         Debug.Log(score);
     }
 
-    
+    public void EnemyDefeated()
+    {
+        enemies--;
+        Debug.Log("Enemies Left: " + enemies);
+        if (enemies <= 0)
+        {
+            Debug.Log("All Enemies Dead");
+            Time.timeScale = 0f;
+        }
+    }
 
 }

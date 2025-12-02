@@ -17,7 +17,9 @@ public class Brick_Power : MonoBehaviour
                 Instantiate(PowerUp, transform.position, Quaternion.identity);
             }
             
+            GameManager.Instance.EnemyDefeated();
             GameManager.Instance.AddScore(scoreValue);
+            Debug.Log(GameManager.Instance.enemies);
             Debug.Log("Score Added");
             Destroy(gameObject);
         }

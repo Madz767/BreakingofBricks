@@ -4,16 +4,20 @@ using UnityEngine.SceneManagement;
 
 public class MenuManager : MonoBehaviour
 {
+    public Canvas NextLevel;
     public Canvas Pause;
     public Canvas GameOver;
+    public TextMeshProUGUI NextLevelText;
     public TextMeshProUGUI ScoreText;
     public TextMeshProUGUI LivesText;
     public TextMeshProUGUI FinalText;
 
     public void Start()
     {
+        NextLevel.gameObject.SetActive(false);
         Pause.gameObject.SetActive(false);
         GameOver.gameObject.SetActive(false);
+        NextLevel.enabled = false;
         Pause.enabled = false;
         GameOver.enabled = false;
 
@@ -38,6 +42,10 @@ public class MenuManager : MonoBehaviour
         {
             GameOverMenu();
         }
+        if(GameManager.Instance.enemies <= 0)
+        {
+            NextLevelMenu();
+        }
         ScoreText.text = "Score: " + GameManager.Instance.score;
         LivesText.text = "Lives: " + GameManager.Instance.Lives;
     }
@@ -55,7 +63,14 @@ public class MenuManager : MonoBehaviour
         Pause.gameObject.SetActive(false);
         Time.timeScale = 1f;
     }
-
+    public void NextLevelMenu()
+    {
+        NextLevel.enabled = true;
+        NextLevel.gameObject.SetActive(true);
+        NextLevelText.text = "Level Complete!\nFinal Score: " + GameManager.Instance.score;
+        Time.timeScale = 0f;
+        
+    }
     public void GameOverMenu()
     {
         GameOver.enabled = true;
@@ -75,4 +90,45 @@ public class MenuManager : MonoBehaviour
     {
         Application.Quit();
     }
+
+    public void NextLevelLoad()
+    {
+        Time.timeScale = 1f;
+        NextLevel.enabled = false;
+        NextLevel.gameObject.SetActive(false);
+        GameManager.Instance.ResetGame();
+        SceneManager.LoadScene("Level02");
+    }
+
+    public void MainMenuLoad()
+    {
+        Time.timeScale = 1f;
+        NextLevel.enabled = false;
+        NextLevel.gameObject.SetActive(false);
+        DestroyPersistentObjects();
+        SceneManager.LoadScene("Main_Menu");
+    }
+
+
+    private void DestroyPersistentObjects()
+    {
+        //this function destroys all persistent objects
+        //this will only be called when going back to the main menu
+        //this allows for a fresh start when the game is finished
+
+        var temp = new GameObject("Temp");
+        DontDestroyOnLoad(temp);
+        foreach (var obj in temp.scene.GetRootGameObjects())
+        {
+            if (obj.name != "Temp")
+            {
+                Destroy(obj);
+            }
+        }
+        Destroy(temp);
+    }
+
+
+
+
 }

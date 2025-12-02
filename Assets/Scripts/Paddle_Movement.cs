@@ -2,13 +2,25 @@ using UnityEngine;
 
 public class Paddle_Movement : MonoBehaviour
 {
+    public static Paddle_Movement Instance;
 
     public float speed;
     private float sideInput;
 
     private Rigidbody2D rb;
 
-
+    private void Awake()
+    {
+        if (Instance == null)
+        {
+            Instance = this;
+            DontDestroyOnLoad(gameObject);
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
+    }
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -27,6 +39,10 @@ public class Paddle_Movement : MonoBehaviour
     {
         sideInput = Input.GetAxis("Horizontal");
         rb.linearVelocity = new Vector2(sideInput * speed, 1);
+        if (Input.GetKeyDown(KeyCode.Q))
+        {
+            GameManager.Instance.enemies = 0;
+        }
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
