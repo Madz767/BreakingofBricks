@@ -1,5 +1,10 @@
 using UnityEngine;
 
+
+//what is a good game without a spawner?
+//or a brick breaker without bricks?
+
+
 public class Brick_Spawner : MonoBehaviour
 {
 

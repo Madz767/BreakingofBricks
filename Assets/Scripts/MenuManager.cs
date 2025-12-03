@@ -2,6 +2,13 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
+
+//second menu script here
+//yeah this is the bulk of the menu logic
+//each function does almost exactly what it says
+
+//this script also manages the texts and some of the UI elements
+
 public class MenuManager : MonoBehaviour
 {
     public Canvas NextLevel;
@@ -96,8 +103,8 @@ public class MenuManager : MonoBehaviour
         Time.timeScale = 1f;
         NextLevel.enabled = false;
         NextLevel.gameObject.SetActive(false);
-        GameManager.Instance.ResetGame();
         SceneManager.LoadScene("Level02");
+        GameManager.Instance.ResetGame();
     }
 
     public void MainMenuLoad()

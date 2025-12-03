@@ -1,5 +1,7 @@
 using UnityEngine;
 
+//this was a fun one to make 
+
 public class Ball_Movement : MonoBehaviour
 {
 
@@ -51,6 +53,9 @@ public class Ball_Movement : MonoBehaviour
     {
         //this code avoids having the ball just having perfect bounces and adds some randomness to it
         Vector2 vel = rb.linearVelocity;
+
+        //this script directly affects the angles at which the ball bounces off surfaces
+        //even then i still had to add corners to avoid the ball getting stuck at the top
 
         if (Mathf.Abs(vel.x) < 0.25f)
         {

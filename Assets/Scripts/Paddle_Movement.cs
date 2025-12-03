@@ -1,5 +1,6 @@
 using UnityEngine;
 
+//the paddle is pretty simple only going back and forth
 public class Paddle_Movement : MonoBehaviour
 {
     public static Paddle_Movement Instance;
@@ -39,10 +40,14 @@ public class Paddle_Movement : MonoBehaviour
     {
         sideInput = Input.GetAxis("Horizontal");
         rb.linearVelocity = new Vector2(sideInput * speed, 1);
-        if (Input.GetKeyDown(KeyCode.Q))
-        {
-            GameManager.Instance.enemies = 0;
-        }
+
+
+        //I was adding a debug through the Q key to check certain things during runtime
+
+        //if (Input.GetKeyDown(KeyCode.Q))
+        //{
+        //    GameManager.Instance.enemies = 0;
+        //}
     }
 
     private void OnTriggerEnter2D(Collider2D collision)

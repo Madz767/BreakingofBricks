@@ -1,6 +1,10 @@
 using System.Collections;
 using UnityEngine;
 
+
+//this is the game manager, most of my game logic is within
+
+
 public class GameManager : MonoBehaviour
 {
 
@@ -36,7 +40,7 @@ public class GameManager : MonoBehaviour
         //setting the time, health, and amount of enemies
         Time.timeScale = 1f;
         Lives = 3;
-        enemies = GameObject.FindGameObjectsWithTag("Enemy").Length +1;
+        enemies = 15;
 
         //creating the ball
         Instantiate(Ball, Ball_Spawner.position, Quaternion.identity);
@@ -55,15 +59,13 @@ public class GameManager : MonoBehaviour
 
     public void ResetGame()
     {
-        
-        
-        
-        enemies = GameObject.FindGameObjectsWithTag("Enemy").Length + 1;
-        score = 0;
+        enemies = 15;
+        //score = 0;
         Lives = 3;
         Shield.SetActive(false);
         Ball.transform.position = Ball_Spawner.position;
         Ball.transform.parent = Ball_Spawner;
+        Debug.Log(enemies);
     }
 
     public bool LostBall()

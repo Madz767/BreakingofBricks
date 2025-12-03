@@ -1,5 +1,8 @@
 using UnityEngine;
 
+//this is where i determine if a brick has died or not
+// and if it should spawn a power up
+
 public class Brick_Power : MonoBehaviour
 {
     public int scoreValue;
